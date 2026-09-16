@@ -35,12 +35,12 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
-    test_size=0.6,
+    test_size=0.2,
     random_state=0,
     stratify=y
 )
-from sklearn.ensemble import RandomForestClassifier
-classifier = RandomForestClassifier(n_estimators=200, criterion='entropy', random_state=0)
+from xgboost import XGBClassifier
+classifier = XGBClassifier()
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 
