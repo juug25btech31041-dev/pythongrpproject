@@ -1,13 +1,12 @@
 import numpy as np
 import pandas as pd
 
-from pathlib import Path
+df1 = pd.read_csv('/Users/preeti/Desktop/python project/pythongrpproject/Tuesday-WorkingHours.pcap_ISCX.csv', low_memory=True)
+df2 = pd.read_csv('/Users/preeti/Desktop/python project/pythongrpproject/Wednesday-workingHours.pcap_ISCX.csv', low_memory=True)
+df3 = pd.read_csv('/Users/preeti/Desktop/python project/pythongrpproject/Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv', low_memory=True)
 
-BASE_DIR = Path(__file__).resolve().parent
 
-df1 = pd.read_csv(BASE_DIR / 'Tuesday-WorkingHours.pcap_ISCX.csv', low_memory=True)
-df2 = pd.read_csv(BASE_DIR / 'Wednesday-workingHours.pcap_ISCX.csv', low_memory=True)
-df3 = pd.read_csv(BASE_DIR / 'Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv', low_memory=True)
+
 
 dataset = pd.concat([df1, df2, df3], ignore_index=True)
 
@@ -35,12 +34,12 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
-    test_size=0.6,
+    test_size=0.2,
     random_state=0,
     stratify=y
 )
-from lightgbm import LGBMClassifier
-classifier = LGBMClassifier()
+from sklearn.ensemble import GradientBoostingClassifier
+classifier = GradientBoostingClassifier()
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 
